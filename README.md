@@ -15,15 +15,15 @@ is a simple Go tool that fetches ASN (Autonomous System Number) information from
 
 ### Fetch ASN for a domain via stdin:
 
-`echo "domain.tld" | goasn`
+`$ echo "domain.tld" | goasn`
 
 ### Fetch ASN for an organization via stdin:
 
-`echo "organization_name" | goasn`
+`$ echo "organization_name" | goasn`
 
 ### Fetch ASN for multiple domains or organizations from a file:
 
-`cat urls.txt | goasn`
+`$ cat urls.txt | goasn`
 
 ## Example
 
@@ -32,12 +32,12 @@ Standard mode:
 ```
 $ echo "intigriti.com" | goasn
 
-AS1337
+AS16509
 
 ```
 ## Chain with other tools:
 
-Convert domain names to org, get the ip ranges, and subdomains:
+Convert domain names to org, get the IP ranges, and subdomains:
 
 ```
 $ echo tesla.com | dtoconv | goasn | asnmap -silent | tlsx -san -cn -silent -resp-only
@@ -57,7 +57,7 @@ sg-1.solarcity.com
 ..SNIP..
 ```
 
-Get the IP ranges of organizations, and extract ports (or exposed services, cves, queries, ..) from Shodan:
+Get the IP ranges of organizations and extract ports (or exposed services, CVEs, queries, etc.) from Shodan:
 
 ```
 $ cat orgs.txt | goasn | asnmap -silent | sXtract -ir -q "port:(21 OR 3389 OR 1337 OR 5000 OR 8080)"
@@ -79,6 +79,6 @@ $ cat orgs.txt | goasn | asnmap -silent | sXtract -ir -q "port:(21 OR 3389 OR 13
 
 From a single org (or domain):
 
-`echo tesla | goasn | asnmap -silent | sXtract -ir -q "200 OK"`
+`$ echo Tesla | goasn | asnmap -silent | sXtract -ir -q "200 OK"`
 
 ![image](https://github.com/user-attachments/assets/8b8d27b8-5b7f-4eb8-bc56-56051f57b57d)
