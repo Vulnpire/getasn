@@ -15,33 +15,70 @@ is a simple Go tool that fetches ASN (Autonomous System Number) information from
 
 ### Fetch ASN for a domain via stdin:
 
-`echo "domain.tld" | ./goasn`
+`echo "domain.tld" | goasn`
 
 ### Fetch ASN for an organization via stdin:
 
-`echo "organization_name" | ./goasn`
+`echo "organization_name" | goasn`
 
 ### Fetch ASN for multiple domains or organizations from a file:
 
-cat urls.txt | ./goasn
+`cat urls.txt | goasn`
 
 ## Example
 
 Standard mode:
 
-`$ echo "intigriti.com" | ./goasn`
+```
+$ echo "intigriti.com" | goasn
+
 AS1337
 
+```
 ## Chain with other tools:
 
-`echo youtube | ./goasn | asnmap -silent | tlsx -san -cn -silent -resp-only`
+Convert domain names to org, get the ip ranges, and subdomains:
 
-Get the IP ranges from Shodan:
+```
+$ echo tesla.com | dtoconv | goasn | asnmap -silent | tlsx -san -cn -silent -resp-only
 
-`cat orgs.txt | ./goasn | asnmap -silent | sXtract -ir -q "200 OK"`
+gp-zg.ericssonnikolatesla.com
+dal11-gpgw1.tesla.com
+93.179.67.13
+autodiscover.tesla-sv.ru
+mail.tesla-sv.ru
+autoconfig.tesla-sv.ru
+s3.b.smf11.tcs.tesla.com
+x3-prod.obs.tesla.com
+x3-eng.obs.tesla.com
+teslamotors.com
+solarcity.com
+sg-1.solarcity.com
+..SNIP..
+```
+
+Get the IP ranges of organizations, and extract ports (or exposed services, cves, queries, ..) from Shodan:
+
+```
+$ cat orgs.txt | goasn | asnmap -silent | sXtract -ir -q "port:(21 OR 3389 OR 1337 OR 5000 OR 8080)"
+
+205.149.8.234
+205.149.15.116
+205.149.11.253
+205.149.8.242
+205.149.8.232
+205.149.8.245
+205.149.11.31
+205.149.11.187
+205.149.13.132
+205.149.14.61
+205.149.15.21
+205.149.15.158
+205.149.8.26
+```
 
 From a single org (or domain):
 
-`echo tesla | ./goasn | asnmap -silent | sXtract -ir -q "200"`
+`echo tesla | goasn | asnmap -silent | sXtract -ir -q "200 OK"`
 
 ![image](https://github.com/user-attachments/assets/8b8d27b8-5b7f-4eb8-bc56-56051f57b57d)
