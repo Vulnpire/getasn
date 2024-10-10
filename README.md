@@ -99,7 +99,7 @@ $ cat ~/.axiom/modules/asnrecon.json
 ## Getting IP addresses using Axiom
 
 ```
-$ cat ~/.axiom/modules/asnrecon-ips.json~/.axiom/modules/asnrecon-ips.json~/.axiom/modules/asnrecon-ips.json
+$ cat ~/.axiom/modules/asnrecon-ips.json
 
 [{
         "command":"cat input | dtoconv | goasn | asnmap -silent | sXtract -ir -q \"200 OK\" | anew output",
