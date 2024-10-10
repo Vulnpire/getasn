@@ -82,3 +82,27 @@ From a single org (or domain):
 `$ echo Tesla | goasn | asnmap -silent | sXtract -ir -q "200 OK"`
 
 ![image](https://github.com/user-attachments/assets/8b8d27b8-5b7f-4eb8-bc56-56051f57b57d)
+
+# Automation:
+
+## Using the tool with Axiom
+
+```
+$ cat ~/.axiom/modules/asnrecon.json
+
+[{
+        "command":"cat input | dtoconv | goasn | asnmap -silent | tlsx -san -cn -silent -resp-only | anew output",
+        "ext":"txt"
+}]
+```
+
+## Getting IP addresses using Axiom
+
+```
+$ cat ~/.axiom/modules/asnrecon-ips.json~/.axiom/modules/asnrecon-ips.json~/.axiom/modules/asnrecon-ips.json
+
+[{
+        "command":"cat input | dtoconv | goasn | asnmap -silent | sXtract -ir -q \"200 OK\" | anew output",
+        "ext":"txt"
+}]
+```
