@@ -1,4 +1,4 @@
-# goasn
+# getasn
 is a simple Go tool that fetches ASN (Autonomous System Number) information from [bgp.he.net](https://bgp.he.net) for a given domain or organization name. It supports input from either stdin or a file and can output results in both standard and verbose modes.
 
 ## Features
@@ -9,28 +9,28 @@ is a simple Go tool that fetches ASN (Autonomous System Number) information from
 
 ## Installation
 
-`go install github.com/Vulnpire/goasn@latest`
+`go install github.com/Vulnpire/getasn@latest`
 
 ## Usage
 
 ### Fetch ASN for a domain via stdin:
 
-`$ echo "domain.tld" | goasn`
+`$ echo "domain.tld" | getasn`
 
 ### Fetch ASN for an organization via stdin:
 
-`$ echo "organization_name" | goasn`
+`$ echo "organization_name" | getasn`
 
 ### Fetch ASN for multiple domains or organizations from a file:
 
-`$ cat urls.txt | goasn`
+`$ cat urls.txt | getasn`
 
 ## Example
 
 Standard mode:
 
 ```
-$ echo "intigriti.com" | goasn
+$ echo "intigriti.com" | getasn
 
 AS16509
 
@@ -40,7 +40,7 @@ AS16509
 Convert domain names to org, get the IP ranges, and subdomains:
 
 ```
-$ echo tesla.com | dtoconv | goasn | asnmap -silent | tlsx -san -cn -silent -resp-only
+$ echo tesla.com | dtoconv | getasn | asnmap -silent | tlsx -san -cn -silent -resp-only
 
 gp-zg.ericssonnikolatesla.com
 dal11-gpgw1.tesla.com
@@ -60,7 +60,7 @@ sg-1.solarcity.com
 Get the IP ranges of organizations and extract ports (or exposed services, CVEs, queries, etc.) from Shodan:
 
 ```
-$ cat orgs.txt | goasn | asnmap -silent | sXtract -ir -q "port:(21 OR 3389 OR 1337 OR 5000 OR 8080)"
+$ cat orgs.txt | getasn | asnmap -silent | sXtract -ir -q "port:(21 OR 3389 OR 1337 OR 5000 OR 8080)"
 
 205.149.8.234
 205.149.15.116
@@ -79,7 +79,7 @@ $ cat orgs.txt | goasn | asnmap -silent | sXtract -ir -q "port:(21 OR 3389 OR 13
 
 From a single org (or domain):
 
-`$ echo Tesla | goasn | asnmap -silent | sXtract -ir -q "200 OK"`
+`$ echo Tesla | getasn | asnmap -silent | sXtract -ir -q "200 OK"`
 
 ![image](https://github.com/user-attachments/assets/8b8d27b8-5b7f-4eb8-bc56-56051f57b57d)
 
@@ -91,7 +91,7 @@ From a single org (or domain):
 $ cat ~/.axiom/modules/asnrecon.json
 
 [{
-        "command":"cat input | dtoconv | goasn | asnmap -silent | tlsx -san -cn -silent -resp-only | anew output",
+        "command":"cat input | dtoconv | getasn | asnmap -silent | tlsx -san -cn -silent -resp-only | anew output",
         "ext":"txt"
 }]
 ```
@@ -102,7 +102,7 @@ $ cat ~/.axiom/modules/asnrecon.json
 $ cat ~/.axiom/modules/asnrecon-ips.json
 
 [{
-        "command":"cat input | dtoconv | goasn | asnmap -silent | sXtract -ir -q \"200 OK\" | anew output",
+        "command":"cat input | dtoconv | getasn | asnmap -silent | sXtract | anew output",
         "ext":"txt"
 }]
 ```
