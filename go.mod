@@ -1,4 +1,4 @@
-module github.com/Vulnpire/goasn
+module github.com/Vulnpire/getasn
 
 go 1.22
 
